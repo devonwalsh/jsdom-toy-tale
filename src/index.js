@@ -13,11 +13,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  document.querySelector(".add-toy-form").addEventListener("submit", () => {
+    event.preventDefault();
+    let newToy = {};
+    let formData = document.querySelectorAll(".input-text")
+    formData.forEach( element => {
+      newToy[element.name] = element.value;
+    })
+    newToy.likes = 0;
+
+    const configObj = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(newToy)
+    }; 
+    
+    fetch("http://localhost:3000/toys", configObj)
+  });
+
   fetch("http://localhost:3000/toys")
   .then(response => response.json())
   .then(data => {
     data.forEach( toy => {
-      console.log(toy);
 
       const toyCollection = document.getElementById("toy-collection");
       const card = document.createElement("div");
