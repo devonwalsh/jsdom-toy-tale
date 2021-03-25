@@ -27,8 +27,7 @@ function addToyCards() {
   fetch("http://localhost:3000/toys")
     .then(response => response.json())
     .then(data => {
-      data.forEach( toy => populateToyCards(toy));
-      //addLikeCountEventListener();
+      data.forEach( toy => populateToyCards(toy))
     });
 }
 
